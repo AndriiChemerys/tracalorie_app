@@ -31,9 +31,15 @@ const ItemCtrl = (function () {
         totalCalories: 0
     }
 
+    // Public methods
     return {
         getItems: function () {
             return data.items;
+        },
+        addItem: function (name, calories) {
+            // Create ID
+
+            console.log(name, calories);
         },
         logData: function () {
             return data;
@@ -91,7 +97,16 @@ const AppCtrl = (function (ItemCtrl, UICtrl) {
 
     // Add item submit
     const itemAddSubmit = function (e) {
-        console.log('Add');
+        // Get form input from UI Controller
+        const input = UICtrl.getItemInput();
+
+        // Check for name and calorie input
+        if (input.name !== '' && input.calories !== '') {
+            console.log(123);
+            //Add item
+            const newItem = ItemCtrl.addItem(input.name, input.calories);
+        }
+        console.log(input);
         e.preventDefault();
     }
 
