@@ -12,21 +12,9 @@ const ItemCtrl = (function () {
   // Data Structure / State
   const data = {
     items: [
-      //   {
-      //     id: 0,
-      //     name: "Steak Dinner",
-      //     calories: 1200,
-      //   },
-      //   {
-      //     id: 1,
-      //     name: "Cookie",
-      //     calories: 400,
-      //   },
-      //   {
-      //     id: 2,
-      //     name: "Eggs",
-      //     calories: 300,
-      //   },
+      // {id: 0, name: 'Steak Dinner', calories: 1200},
+      // {id: 1, name: 'Cookie', calories: 400},
+      // {id: 2, name: 'Eggs', calories: 300}
     ],
     currentItem: null,
     totalCalories: 0,
@@ -39,7 +27,6 @@ const ItemCtrl = (function () {
     },
     addItem: function (name, calories) {
       let ID;
-
       // Create ID
       if (data.items.length > 0) {
         ID = data.items[data.items.length - 1].id + 1;
@@ -48,16 +35,29 @@ const ItemCtrl = (function () {
       }
 
       // Calories to number
-      const calories = parseInte(calories);
+      calories = parseInt(calories);
 
       // Create new item
       newItem = new Item(ID, name, calories);
 
       // Add to items array
       data.items.push(newItem);
-      // console.log(name, calories);
 
       return newItem;
+    },
+    getTotalCalories: function () {
+      let total = 0;
+
+      // Loop through items and add cals
+      data.items.forEach(function (item) {
+        total += item.calories;
+      });
+
+      // Set total cal in data structure
+      data.totalCalories = total;
+
+      // Return total
+      return data.totalCalories;
     },
     logData: function () {
       return data;
@@ -72,6 +72,7 @@ const UICtrl = (function () {
     addBtn: ".add-btn",
     itemNameInput: "#item-name",
     itemCaloriesInput: "#item-calories",
+    totalCalories: ".total-calories",
   };
 
   // Public methods
@@ -81,11 +82,11 @@ const UICtrl = (function () {
 
       items.forEach(function (item) {
         html += `<li class="collection-item" id="item-${item.id}">
-                <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
-                <a href="#" class="secondary-content">
-                  <i class="fa fa-pencil"></i>
-                </a>
-              </li>`;
+        <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+        <a href="#" class="secondary-content">
+          <i class="edit-item fa fa-pencil"></i>
+        </a>
+      </li>`;
       });
 
       // Insert list items
@@ -94,27 +95,23 @@ const UICtrl = (function () {
     getItemInput: function () {
       return {
         name: document.querySelector(UISelectors.itemNameInput).value,
-        calories: document.querySelector(UISelectors.itemNameInput).value,
+        calories: document.querySelector(UISelectors.itemCaloriesInput).value,
       };
     },
     addListItem: function (item) {
-        // Show the list
-        document.querySelector(UISelectors.itemList).style.display = 'block';
+      // Show the list
+      document.querySelector(UISelectors.itemList).style.display = "block";
       // Create li element
       const li = document.createElement("li");
       // Add class
-      li.className = "Collection-item";
+      li.className = "collection-item";
       // Add ID
-      li.id = `
-                item-${item.id}
-            `;
+      li.id = `item-${item.id}`;
       // Add HTML
-      li.innerHTML = `
-                <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
-                <a href="#" class="secondary-content">
-                  <i class="fa fa-pencil"></i>
-                </a>
-            `;
+      li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
+      <a href="#" class="secondary-content">
+        <i class="edit-item fa fa-pencil"></i>
+      </a>`;
       // Insert item
       document
         .querySelector(UISelectors.itemList)
@@ -124,9 +121,14 @@ const UICtrl = (function () {
       document.querySelector(UISelectors.itemNameInput).value = "";
       document.querySelector(UISelectors.itemCaloriesInput).value = "";
     },
-    hideList: function(){
-        document.querySelector(UISelectors.itemList).style.display = 'none';
-    }
+    hideList: function () {
+      document.querySelector(UISelectors.itemList).style.display = "none";
+    },
+    showTotalCalories: function (totalCalories) {
+      document.querySelector(
+        UISelectors.totalCalories
+      ).textContent = totalCalories;
+    },
     getSelectors: function () {
       return UISelectors;
     },
@@ -134,12 +136,13 @@ const UICtrl = (function () {
 })();
 
 // App Controller
-const AppCtrl = (function (ItemCtrl, UICtrl) {
+const App = (function (ItemCtrl, UICtrl) {
   // Load event listeners
-  const loadEventListener = function () {
+  const loadEventListeners = function () {
+    // Get UI selectors
     const UISelectors = UICtrl.getSelectors();
 
-    //Add item event
+    // Add item event
     document
       .querySelector(UISelectors.addBtn)
       .addEventListener("click", itemAddSubmit);
@@ -149,19 +152,24 @@ const AppCtrl = (function (ItemCtrl, UICtrl) {
   const itemAddSubmit = function (e) {
     // Get form input from UI Controller
     const input = UICtrl.getItemInput();
-    // Add item to UI list
-    UICtrl.addListItem(newItem);
-
-    // Clear fields
-    UICtrl.clearInput();
 
     // Check for name and calorie input
     if (input.name !== "" && input.calories !== "") {
-      console.log(123);
-      //Add item
+      // Add item
       const newItem = ItemCtrl.addItem(input.name, input.calories);
+
+      // Add item to UI list
+      UICtrl.addListItem(newItem);
+
+      // Get total calories
+      const totalCalories = ItemCtrl.getTotalCalories();
+      // Add total calories to UI
+      UICtrl.showTotalCalories(totalCalories);
+
+      // Clear fields
+      UICtrl.clearInput();
     }
-    console.log(input);
+
     e.preventDefault();
   };
 
@@ -172,21 +180,23 @@ const AppCtrl = (function (ItemCtrl, UICtrl) {
       const items = ItemCtrl.getItems();
 
       // Check if any items
-      if(items.length === 0){
-          UICtrl.hideList();
+      if (items.length === 0) {
+        UICtrl.hideList();
       } else {
-          // Populate list with items
-          UICtrl.populateItemList(items);
+        // Populate list with items
+        UICtrl.populateItemList(items);
       }
 
-      // Populate list with items
-      UICtrl.populateItemList(items);
+      // Get total calories
+      const totalCalories = ItemCtrl.getTotalCalories();
+      // Add total calories to UI
+      UICtrl.showTotalCalories(totalCalories);
 
       // Load event listeners
-      loadEventListener();
+      loadEventListeners();
     },
   };
 })(ItemCtrl, UICtrl);
 
 // Initialize App
-AppCtrl.init();
+App.init();
