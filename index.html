@@ -8,67 +8,78 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css">
   <title>Tracalorie | Meal & Calorie Tracker</title>
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper light-green darken-3">
-      <div class="container">
-        <a href="#" class="brand-logo center">Tracalorie</a>
-        <ul class="right">
-          <li>
-            <a href="#" class="clear-btn btn yellow darken-4">Clear All</a>
-          </li>
-        </ul>
+  <section class="section-wrapper">
+
+    <nav class="transparent">
+      <div class="nav-wrapper transparent">
+        <div class="container">
+          <a href="#" class="brand-logo center">Tracalorie</a>
+        </div>
       </div>
-    </div>
-  </nav>
-  <br />
+    </nav>
+    <br />
 
-  <div class="container">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">Add Meal / Food Item</span>
-        <form class="col">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" placeholder="Add Item" id="item-name" />
-              <label for="item-name">Meal</label>
+    <div class="container">
+      <div class="card opacity">
+        <div class="card-content">
+          <span class="card-title">Add Meal / Food Item</span>
+          <form class="col">
+            <div class="row">
+              <div class="input-field col s6">
+                <input type="text" placeholder="Add Item" id="item-name" />
+                <label for="item-name">Meal</label>
+              </div>
+              <div class="input-field col s6">
+                <input type="number" placeholder="Add Calories" id="item-calories" />
+                <label for="item-calories">Calories</label>
+              </div>
+              <button class="add-btn btn light-green darken-3">
+                <i class="fa fa-plus"></i> Add Meal
+              </button>
+
+              <a href="#" class="clear-btn btn yellow darken-4">Clear All</a>
+
+              <button class="update-btn btn orange">
+                <i class="fa fa-pencil-square-o"></i> Update Meal
+              </button>
+              <button class="delete-btn btn red">
+                <i class="fa fa-remove"></i> Delete Meal
+              </button>
+
+              <button class="back-btn btn grey pull-right">
+                <i class="fa fa-chevron-circle-left"></i> Back
+              </button>
             </div>
-            <div class="input-field col s6">
-              <input type="number" placeholder="Add Calories" id="item-calories" />
-              <label for="item-calories">Calories</label>
-            </div>
-            <button class="add-btn btn light-green darken-3">
-              <i class="fa fa-plus"></i> Add Meal
-            </button>
-
-            <button class="update-btn btn orange">
-              <i class="fa fa-pencil-square-o"></i> Update Meal
-            </button>
-            <button class="delete-btn btn red">
-              <i class="fa fa-remove"></i> Delete Meal
-            </button>
-
-            <button class="back-btn btn grey pull-right">
-              <i class="fa fa-chevron-circle-left"></i> Back
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
+
+      <!-- Calorie Count -->
+      <h3 class="center-align total-text">
+        Total Calories: <span class="total-calories">0</span>
+      </h3>
+
+      <!-- Item List -->
+      <ul id="item-list" class="collection">
+
+      </ul>
     </div>
 
-    <!-- Calorie Count -->
-    <h3 class="center-align">
-      Total Calories: <span class="total-calories">0</span>
-    </h3>
+  </section>
 
-    <!-- Item List -->
-    <ul id="item-list" class="collection">
+  <footer class="footer light-green darken-3">
+    <span class="footer__signature">andriichemerys@gmail.com</span><br />
+    <span class="footer__signature">Customized and Built with &#9825; by Andrii Chemerys, while passing "Modern
+      JavaScript From The Beginning" course.</span><br />
 
-    </ul>
-  </div>
+    <span class="footer__rights">Wszelkie prawa zastrzeżone / All rigths reserved</span> <br />
+    <span>&copy; 2020</span>
+  </footer>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>

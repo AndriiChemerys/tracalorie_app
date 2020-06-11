@@ -198,7 +198,7 @@ const UICtrl = (function () {
       let html = "";
 
       items.forEach(function (item) {
-        html += `<li class="collection-item" id="item-${item.id}">
+        html += `<li class="collection-item opacity" id="item-${item.id}">
         <strong>${item.name}: </strong> <em>${item.calories} Calories</em>
         <a href="#" class="secondary-content">
           <i class="edit-item fa fa-pencil"></i>

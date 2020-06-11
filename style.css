@@ -1,0 +1,49 @@
+html,
+body {
+    height: 100%;
+}
+
+nav {
+    background-color: none;
+}
+
+body {}
+
+.section-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    background-image: url(img/fitness_girl.jpg);
+    background-size: cover;
+    background-position: 25% 0%;
+    background-repeat: no-repeat;
+}
+
+.opacity {
+    opacity: .8;
+}
+
+.total-text {
+    color: #68944a;
+}
+
+.btn {
+    margin: 0 auto;
+    width: 176px;
+}
+
+.footer {
+    flex-grow: 0;
+
+    opacity: 0.8;
+
+    color: white;
+    text-align: center;
+    font-family: Roboto, sans-serif;
+    padding: 20px;
+}
+
+.footer p {
+    margin: 0;
+}
