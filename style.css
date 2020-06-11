@@ -1,3 +1,7 @@
+/* ############################################## */
+/* Main section */
+/* ############################################## */
+
 html,
 body {
     height: 100%;
@@ -7,31 +11,43 @@ nav {
     background-color: none;
 }
 
-body {}
-
 .section-wrapper {
+    /* sticky footer */
     display: flex;
     flex-direction: column;
     min-height: 100%;
 
+    /* background image with some fit girl */
     background-image: url(img/fitness_girl.jpg);
     background-size: cover;
-    background-position: 25% 0%;
+    background-position: 25% 20%;
     background-repeat: no-repeat;
 }
 
+.btn-wrapper {
+    padding: 0 24px;
+    /* padding: 10px; */
+    /* margin: 0 auto; */
+}
+
+/* Adding opacity to Add Meal section */
 .opacity {
     opacity: .8;
 }
 
-.total-text {
-    color: #68944a;
+.row {
+    margin-bottom: 0;
 }
 
 .btn {
-    /* display: block; */
-    margin: 0 auto;
+    margin: 5px 0;
+    /* border: 1px solid red; */
+    /* padding: 10px; */
     width: 176px;
+}
+
+.total-text {
+    color: #478320;
 }
 
 /* ############################################## */
@@ -49,8 +65,6 @@ body {}
     padding: 20px;
 }
 
-.footer__signature {}
-
 .footer__social-media {
     padding: 0 30vw;
 }
@@ -62,10 +76,7 @@ body {}
 }
 
 .footer_icon,
-.footer__gh-link {
-    color: rgb(212, 212, 212);
-}
-
+.footer__gh-link,
 .footer__bgi-info {
     color: white;
 }
