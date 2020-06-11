@@ -29,9 +29,14 @@ body {}
 }
 
 .btn {
+    /* display: block; */
     margin: 0 auto;
     width: 176px;
 }
+
+/* ############################################## */
+/* Footer */
+/* ############################################## */
 
 .footer {
     flex-grow: 0;
@@ -44,6 +49,35 @@ body {}
     padding: 20px;
 }
 
-.footer p {
-    margin: 0;
+.footer__signature {}
+
+.footer__social-media {
+    padding: 0 30vw;
+}
+
+.footer__social-links {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_icon,
+.footer__gh-link {
+    color: rgb(212, 212, 212);
+}
+
+.footer__bgi-info {
+    color: white;
+}
+
+@media only screen and (min-width: 600px) {
+    .footer__social-media {
+        padding: 0 40vw;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .footer__social-media {
+        padding: 0 43vw;
+    }
 }
